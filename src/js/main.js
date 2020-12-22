@@ -289,16 +289,18 @@ function initWhiteboard() {
             });
         $("#whiteboardUnlockBtn").hide();
         $("#whiteboardLockBtn").show();
+        $("#sizeContainer").hide();
 
         // switch tool
         $(".whiteboard-tool")
             .off("click")
             .click(function () {
                 $(".whiteboard-tool").removeClass("active");
+                InfoService.hideSize();
                 $(this).addClass("active");
                 var activeTool = $(this).attr("tool");
                 whiteboard.setTool(activeTool);
-                if (activeTool == "mouse" || activeTool == "recSelect") {
+                if (activeTool == "mouse" || activeTool == "recSelect" || activeTool == "color") {
                     $(".activeToolIcon").empty();
                 } else {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
@@ -528,6 +530,12 @@ function initWhiteboard() {
             .off("click")
             .click(() => {
                 InfoService.toggleDisplayInfo();
+            });
+
+        $("#displaySizeBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleSize();
             });
 
         var btnsMini = false;

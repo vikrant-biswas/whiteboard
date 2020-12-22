@@ -8,8 +8,14 @@ class InfoService {
      * @type {boolean}
      */
     #infoAreDisplayed = false;
+    #sizeDisplayed = false;
+
     get infoAreDisplayed() {
         return this.#infoAreDisplayed;
+    }
+
+    get sizeDisplayed() {
+        return this.#sizeDisplayed;
     }
 
     /**
@@ -131,6 +137,35 @@ class InfoService {
         } else {
             this.displayInfo();
         }
+    }
+
+    toggleSize() {
+        const { sizeDisplayed } = this;
+        if (sizeDisplayed) {
+            this.hideSize();
+        } else {
+            this.displaySize();
+        }
+    }
+
+    /**
+     * Show the Size div
+     */
+    displaySize() {
+        $("#sizeContainer").toggleClass("displayNone", false);
+        $("#displaySizeBtn").toggleClass("active", true);
+        this.#sizeDisplayed = true;
+        $("#sizeContainer").show();
+    }
+
+    /**
+     * Hide the Size div
+     */
+    hideSize() {
+        $("#sizeContainer").toggleClass("displayNone", true);
+        $("#displaySizeBtn").toggleClass("active", false);
+        this.#sizeDisplayed = false;
+        $("#sizeContainer").hide();
     }
 }
 

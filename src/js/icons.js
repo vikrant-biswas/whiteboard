@@ -13,12 +13,15 @@ import {
     faUpload,
     faShareSquare,
     faAngleLeft,
+    faAngleUp,
+    faAngleDown,
     faAngleRight,
     faSortDown,
     faExpandArrowsAlt,
     faLock,
     faLockOpen,
     faInfoCircle,
+    faSlidersH,
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faSquare,
@@ -43,6 +46,8 @@ library.add(
     faShareSquare,
     faAngleLeft,
     faAngleRight,
+    faAngleUp,
+    faAngleDown,
     faSortDown,
     faExpandArrowsAlt,
     faSquare,
@@ -52,7 +57,8 @@ library.add(
     faPlusSquare,
     faLock,
     faLockOpen,
-    faInfoCircle
+    faInfoCircle,
+    faSlidersH
 );
 
 dom.i2svg();

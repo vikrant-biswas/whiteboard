@@ -67,7 +67,7 @@ const whiteboard = {
 
         //background grid (repeating image) and smallest screen indication
         _this.backgroundGrid = $(
-            `<div style="position: absolute; left:0px; top:0; opacity: 0.2; background-image:url('${_this.settings["backgroundGridUrl"]}'); height: 100%; width: 100%;"></div>`
+            `<div style="position: absolute; left:0px; top:0; opacity: 0.2; left:80px; background-image:url('${_this.settings["backgroundGridUrl"]}'); height: 100%; width: 100%;"></div>`
         );
         // container for background images
         _this.imgContainer = $(
@@ -75,11 +75,11 @@ const whiteboard = {
         );
         // whiteboard canvas
         _this.canvasElement = $(
-            '<canvas id="whiteboardCanvas" style="position: absolute; left:0px; top:0; cursor:crosshair;"></canvas>'
+            '<canvas id="whiteboardCanvas" style="position: absolute; left:80px; top:0; cursor:crosshair;"></canvas>'
         );
         // SVG container holding drawing or moving previews
         _this.svgContainer = $(
-            '<svg style="position: absolute; top:0px; left:0px;" width="100%" height="100%"></svg>'
+            '<svg style="position: absolute; top:0px; left:80px;" width="100%" height="100%"></svg>'
         );
         // drag and drop indicator, hidden by default
         _this.dropIndicator = $(
@@ -87,15 +87,15 @@ const whiteboard = {
         );
         // container for other users cursors
         _this.cursorContainer = $(
-            '<div style="position: absolute; left:0px; top:0; height: 100%; width: 100%;"></div>'
+            '<div id="cursorContainer" style="position: absolute; left:80px; top:0; height: 100%; width: 100%;"></div>'
         );
         // container for texts by users
         _this.textContainer = $(
-            '<div class="textcontainer" style="position: absolute; left:0px; top:0; height: 100%; width: 100%; cursor:text;"></div>'
+            '<div id="textContainer" class="textcontainer" style="position: absolute; left:80px; top:0; height: 100%; width: 100%; cursor:text;"></div>'
         );
         // mouse overlay for draw callbacks
         _this.mouseOverlay = $(
-            '<div id="mouseOverlay" style="cursor:none; position: absolute; left:0px; top:0; height: 100%; width: 100%;"></div>'
+            '<div id="mouseOverlay" style="cursor:none; position: absolute; left:80px; top:0; height: 100%; width: 100%;"></div>'
         );
 
         $(whiteboardContainer)
@@ -1195,14 +1195,14 @@ const whiteboard = {
                             .css({ left: data[0] + "px", top: data[1] - 15 + "px" });
                     } else {
                         _this.cursorContainer.append(
-                            '<div style="font-size:0.8em; padding-left:2px; padding-right:2px; background:gray; color:white; border-radius:3px; position:absolute; left:' +
+                            '<div style="font-size:0.9em; padding:4px; background:#82100b; color:white; border-radius:3px; position:absolute; left:' +
                                 data[0] +
                                 "px; top:" +
                                 (data[1] - 151) +
                                 'px;" class="userbadge ' +
                                 content["username"] +
                                 '">' +
-                                '<div style="width:4px; height:4px; background:gray; position:absolute; top:13px; left:-2px; border-radius:50%;"></div>' +
+                                '<div style="left:0px; top:4px; transform:rotate(45deg); width:0px; height:0px; position:absolute; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right:7px solid #15325F;"></div>' +
                                 decodeURIComponent(atob(content["username"])) +
                                 "</div>"
                         );
