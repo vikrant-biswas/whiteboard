@@ -38,6 +38,8 @@ const whiteboard = {
     ownCursor: null,
     penSmoothLastCoords: [],
     svgLine: null,
+    svgArrow: null,
+    svgDoubleArrow: null,
     svgRect: null,
     svgCirle: null,
     drawBuffer: [],
@@ -172,6 +174,26 @@ const whiteboard = {
                 _this.svgLine.setAttribute("x2", currentPos.x);
                 _this.svgLine.setAttribute("y2", currentPos.y);
                 _this.svgContainer.append(_this.svgLine);
+            } else if (_this.tool === "arrow") {
+                _this.startCoords = currentPos;
+                _this.svgArrow = document.createElementNS(svgns, "line");
+                _this.svgArrow.setAttribute("stroke", "gray");
+                _this.svgArrow.setAttribute("stroke-dasharray", "5, 5");
+                _this.svgArrow.setAttribute("x1", currentPos.x);
+                _this.svgArrow.setAttribute("y1", currentPos.y);
+                _this.svgArrow.setAttribute("x2", currentPos.x);
+                _this.svgArrow.setAttribute("y2", currentPos.y);
+                _this.svgContainer.append(_this.svgArrow);
+            } else if (_this.tool === "double-arrow") {
+                _this.startCoords = currentPos;
+                _this.svgDoubleArrow = document.createElementNS(svgns, "line");
+                _this.svgDoubleArrow.setAttribute("stroke", "gray");
+                _this.svgDoubleArrow.setAttribute("stroke-dasharray", "5, 5");
+                _this.svgDoubleArrow.setAttribute("x1", currentPos.x);
+                _this.svgDoubleArrow.setAttribute("y1", currentPos.y);
+                _this.svgDoubleArrow.setAttribute("x2", currentPos.x);
+                _this.svgDoubleArrow.setAttribute("y2", currentPos.y);
+                _this.svgContainer.append(_this.svgDoubleArrow);
             } else if (_this.tool === "rect" || _this.tool === "recSelect") {
                 _this.svgContainer.find("rect").remove();
                 _this.svgRect = document.createElementNS(svgns, "rect");
@@ -264,6 +286,44 @@ const whiteboard = {
                 _this.sendFunction({
                     t: _this.tool,
                     d: [currentPos.x, currentPos.y, _this.startCoords.x, _this.startCoords.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                });
+                _this.svgContainer.find("line").remove();
+            } else if (_this.tool === "arrow") {
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawArrow(
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    currentPos.x,
+                    currentPos.y,
+                    _this.drawcolor,
+                    _this.thickness
+                );
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [_this.startCoords.x, _this.startCoords.y, currentPos.x, currentPos.y],
+                    c: _this.drawcolor,
+                    th: _this.thickness,
+                });
+                _this.svgContainer.find("line").remove();
+            } else if (_this.tool === "double-arrow") {
+                if (_this.pressedKeys.shift) {
+                    currentPos = _this.getRoundedAngles(currentPos);
+                }
+                _this.drawDoubleSidedArrow(
+                    _this.startCoords.x,
+                    _this.startCoords.y,
+                    currentPos.x,
+                    currentPos.y,
+                    _this.drawcolor,
+                    _this.thickness
+                );
+                _this.sendFunction({
+                    t: _this.tool,
+                    d: [_this.startCoords.x, _this.startCoords.y, currentPos.x, currentPos.y],
                     c: _this.drawcolor,
                     th: _this.thickness,
                 });
@@ -499,6 +559,24 @@ const whiteboard = {
                     _this.svgLine.setAttribute("x2", posToUse.x);
                     _this.svgLine.setAttribute("y2", posToUse.y);
                 }
+            } else if (_this.tool === "arrow") {
+                if (_this.svgArrow) {
+                    let posToUse = currentPos;
+                    if (_this.pressedKeys.shift) {
+                        posToUse = _this.getRoundedAngles(currentPos);
+                    }
+                    _this.svgArrow.setAttribute("x2", posToUse.x);
+                    _this.svgArrow.setAttribute("y2", posToUse.y);
+                }
+            } else if (_this.tool === "double-arrow") {
+                if (_this.svgDoubleArrow) {
+                    let posToUse = currentPos;
+                    if (_this.pressedKeys.shift) {
+                        posToUse = _this.getRoundedAngles(currentPos);
+                    }
+                    _this.svgDoubleArrow.setAttribute("x2", posToUse.x);
+                    _this.svgDoubleArrow.setAttribute("y2", posToUse.y);
+                }
             } else if (_this.tool === "rect" || (_this.tool === "recSelect" && _this.drawFlag)) {
                 if (_this.svgRect) {
                     const width = Math.abs(currentPos.x - _this.startCoords.x);
@@ -669,6 +747,71 @@ const whiteboard = {
         _this.ctx.strokeStyle = color;
         _this.ctx.lineWidth = thickness;
         _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+    },
+    drawArrow: function (fromX, fromY, toX, toY, color, thickness) {
+        var _this = this;
+        var headlen = thickness * 5; // length of head in pixels
+        var dx = toX - fromX;
+        var dy = toY - fromY;
+        var angle = Math.atan2(dy, dx);
+        _this.ctx.beginPath();
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(toX, toY);
+
+        _this.ctx.moveTo(toX, toY);
+        _this.ctx.lineTo(
+            toX - headlen * Math.cos(angle - Math.PI / 6),
+            toY - headlen * Math.sin(angle - Math.PI / 6)
+        );
+        _this.ctx.moveTo(toX, toY);
+        _this.ctx.lineTo(
+            toX - headlen * Math.cos(angle + Math.PI / 6),
+            toY - headlen * Math.sin(angle + Math.PI / 6)
+        );
+
+        _this.ctx.stroke();
+        _this.ctx.closePath();
+    },
+    drawDoubleSidedArrow: function (fromX, fromY, toX, toY, color, thickness) {
+        var _this = this;
+        var headlen = thickness * 5; // length of head in pixels
+        var dx = toX - fromX;
+        var dy = toY - fromY;
+        var angle = Math.atan2(dy, dx);
+        _this.ctx.beginPath();
+        _this.ctx.strokeStyle = color;
+        _this.ctx.lineWidth = thickness;
+        _this.ctx.lineCap = _this.lineCap;
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(
+            fromX + headlen * Math.cos(angle - Math.PI / 6),
+            fromY + headlen * Math.sin(angle - Math.PI / 6)
+        );
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(
+            fromX + headlen * Math.cos(angle + Math.PI / 6),
+            fromY + headlen * Math.sin(angle + Math.PI / 6)
+        );
+
+        _this.ctx.moveTo(fromX, fromY);
+        _this.ctx.lineTo(toX, toY);
+
+        _this.ctx.moveTo(toX, toY);
+        _this.ctx.lineTo(
+            toX - headlen * Math.cos(angle - Math.PI / 6),
+            toY - headlen * Math.sin(angle - Math.PI / 6)
+        );
+        _this.ctx.moveTo(toX, toY);
+        _this.ctx.lineTo(
+            toX - headlen * Math.cos(angle + Math.PI / 6),
+            toY - headlen * Math.sin(angle + Math.PI / 6)
+        );
+
         _this.ctx.stroke();
         _this.ctx.closePath();
     },
@@ -1137,6 +1280,10 @@ const whiteboard = {
                 } else {
                     _this.drawPenSmoothLine(data, color, thickness);
                 }
+            } else if (tool === "arrow") {
+                _this.drawArrow(data[0], data[1], data[2], data[3], color, thickness);
+            } else if (tool === "double-arrow") {
+                _this.drawDoubleSidedArrow(data[0], data[1], data[2], data[3], color, thickness);
             } else if (tool === "rect") {
                 _this.drawRec(data[0], data[1], data[2], data[3], color, thickness);
             } else if (tool === "circle") {
@@ -1220,6 +1367,8 @@ const whiteboard = {
         if (
             isNewData &&
             [
+                "arrow",
+                "double-arrow",
                 "line",
                 "pen",
                 "rect",
@@ -1390,6 +1539,8 @@ const whiteboard = {
         }
         if (
             [
+                "arrow",
+                "double-arrow",
                 "line",
                 "pen",
                 "rect",

@@ -13,6 +13,8 @@ const keybinds = {
     "defmod-x": "setTool_recSelect",
     "defmod-m": "setTool_mouse",
     "defmod-p": "setTool_pen",
+    "defmod-shift-a": "setTool_arrow",
+    "defmod-shift-d": "setTool_doubleArrow",
     "defmod-l": "setTool_line",
     "defmod-r": "setTool_rect",
     "defmod-c": "setTool_circle",
