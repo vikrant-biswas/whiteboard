@@ -9,6 +9,8 @@ class InfoService {
      */
     #infoAreDisplayed = false;
     #sizeDisplayed = false;
+    #rectangleShapesDisplayed = false;
+    #linesDisplayed = false;
 
     get infoAreDisplayed() {
         return this.#infoAreDisplayed;
@@ -16,6 +18,14 @@ class InfoService {
 
     get sizeDisplayed() {
         return this.#sizeDisplayed;
+    }
+
+    get rectangleShapesDisplayed() {
+        return this.#rectangleShapesDisplayed;
+    }
+
+    get linesDisplayed() {
+        return this.#linesDisplayed;
     }
 
     /**
@@ -148,6 +158,24 @@ class InfoService {
         }
     }
 
+    toggleRectangleShapes() {
+        const { rectangleShapesDisplayed } = this;
+        if (rectangleShapesDisplayed) {
+            this.hideRectangleShapes();
+        } else {
+            this.displayRectangleShapes();
+        }
+    }
+
+    toggleLines() {
+        const { linesDisplayed } = this;
+        if (linesDisplayed) {
+            this.hideLines();
+        } else {
+            this.displayLines();
+        }
+    }
+
     /**
      * Show the Size div
      */
@@ -166,6 +194,46 @@ class InfoService {
         $("#displaySizeBtn").toggleClass("active", false);
         this.#sizeDisplayed = false;
         $("#sizeContainer").hide();
+    }
+
+    /**
+     * Show the Rectangle Shapes div
+     */
+    displayRectangleShapes() {
+        $("#rectShapeContainer").toggleClass("displayNone", false);
+        $("#displayRectangleShapesBtn").toggleClass("active", true);
+        this.#rectangleShapesDisplayed = true;
+        $("#rectShapeContainer").show();
+    }
+
+    /**
+     * Hide the Rectangle Shapes div
+     */
+    hideRectangleShapes() {
+        $("#rectShapeContainer").toggleClass("displayNone", true);
+        $("#displayRectangleShapesBtn").toggleClass("active", false);
+        this.#rectangleShapesDisplayed = false;
+        $("#rectShapeContainer").hide();
+    }
+
+    /**
+     * Show the lines div
+     */
+    displayLines() {
+        $("#linesContainer").toggleClass("displayNone", false);
+        $("#displayLinesBtn").toggleClass("active", true);
+        this.#linesDisplayed = true;
+        $("#linesContainer").show();
+    }
+
+    /**
+     * Hide the lines div
+     */
+    hideLines() {
+        $("#linesContainer").toggleClass("displayNone", true);
+        $("#displayLinesBtn").toggleClass("active", false);
+        this.#linesDisplayed = false;
+        $("#linesContainer").hide();
     }
 }
 

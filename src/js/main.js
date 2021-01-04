@@ -297,6 +297,8 @@ function initWhiteboard() {
             .click(function () {
                 $(".whiteboard-tool").removeClass("active");
                 InfoService.hideSize();
+                InfoService.hideRectangleShapes();
+                InfoService.hideLines();
                 $(this).addClass("active");
                 var activeTool = $(this).attr("tool");
                 whiteboard.setTool(activeTool);
@@ -536,6 +538,18 @@ function initWhiteboard() {
             .off("click")
             .click(() => {
                 InfoService.toggleSize();
+            });
+
+        $("#displayRectangleShapesBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleRectangleShapes();
+            });
+
+        $("#displayLinesBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleLines();
             });
 
         var btnsMini = false;

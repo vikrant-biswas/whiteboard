@@ -67,45 +67,86 @@
                 >
                     <i class="fa fa-pencil-alt"></i>
                 </button>
-                <button
-                    style="padding-bottom: 8px; padding-top: 6px;"
-                    tool="line"
-                    title="draw a line"
-                    type="button"
-                    class="whiteboard-tool"
-                >
-                    ╱
-                </button>
-                <button
-                    style="padding-bottom: 8px; padding-top: 6px;"
-                    tool="arrow"
-                    title="draw an arrow"
-                    type="button"
-                    class="whiteboard-tool"
-                >
-                    ↗
-                </button>
-                <button
-                    style="padding-bottom: 8px; padding-top: 6px;"
-                    tool="double-arrow"
-                    title="draw double sided arrow"
-                    type="button"
-                    class="whiteboard-tool"
-                >
-                    ↕
-                </button>
-                <button tool="rect" title="draw a rectangle" type="button" class="whiteboard-tool">
-                    <i class="far fa-square"></i>
-                </button>
-                <button tool="circle" title="draw a circle" type="button" class="whiteboard-tool">
-                    <i class="far fa-circle"></i>
-                </button>
                 <button tool="text" title="write text" type="button" class="whiteboard-tool">
                     <i class="fas fa-font"></i>
                 </button>
                 <button tool="eraser" title="take the eraser" type="button" class="whiteboard-tool">
                     <i class="fa fa-eraser"></i>
                 </button>
+            </div>
+
+            <div class="btn-group">
+                <button
+                    id="displayLinesBtn"
+                    title="Select basic lines"
+                    type="button"
+                    class="whiteboard-tool"
+                >
+                    ╱
+                </button>
+
+                <div id="linesContainer" class="shapeContainer">
+                    <button
+                        style="padding-bottom: 8px; padding-top: 6px;"
+                        tool="line"
+                        title="draw a line"
+                        type="button"
+                        class="whiteboard-tool"
+                    >
+                        ╱
+                    </button>
+                    <button
+                        style="padding-bottom: 8px; padding-top: 6px;"
+                        tool="arrow"
+                        title="draw an arrow"
+                        type="button"
+                        class="whiteboard-tool"
+                    >
+                        ↗
+                    </button>
+                    <button
+                        style="padding-bottom: 8px; padding-top: 6px;"
+                        tool="double-arrow"
+                        title="draw double sided arrow"
+                        type="button"
+                        class="whiteboard-tool"
+                    >
+                        ↕
+                    </button>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button
+                    id="displayRectangleShapesBtn"
+                    title="Select basic shapes"
+                    type="button"
+                    class="whiteboard-tool"
+                >
+                    <i class="far fa-square"></i>
+                </button>
+
+                <div id="rectShapeContainer" class="shapeContainer">
+                    <button
+                        tool="rect"
+                        title="draw a rectangle"
+                        type="button"
+                        class="whiteboard-tool"
+                    >
+                        <i class="far fa-square"></i>
+                    </button>
+                    <button
+                        tool="circle"
+                        title="draw a circle"
+                        type="button"
+                        class="whiteboard-tool"
+                    >
+                        <i class="far fa-circle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="btn-group whiteboard-edit-group">
                 <button tool="color" title="Choose Color" type="button" class="whiteboard-tool">
                     <div
                         id="whiteboardColorpicker"

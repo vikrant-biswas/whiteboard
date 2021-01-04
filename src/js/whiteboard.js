@@ -1031,7 +1031,7 @@ const whiteboard = {
                 fontsize +
                 "em; color:" +
                 textcolor +
-                '; min-width:50px; min-height:50px;"></div>' +
+                '; min-width:200px; min-height:50px;"></div>' +
                 '<div title="remove textbox" class="removeIcon" style="position:absolute; cursor:pointer; top:-4px; right:2px;">x</div>' +
                 '<div title="move textbox" class="moveIcon" style="position:absolute; cursor:move; top:1px; left:2px; font-size: 0.5em;"><i class="fas fa-expand-arrows-alt"></i></div>' +
                 "</div>"
@@ -1342,14 +1342,14 @@ const whiteboard = {
                             .css({ left: data[0] + "px", top: data[1] - 15 + "px" });
                     } else {
                         _this.cursorContainer.append(
-                            '<div style="font-size:0.9em; padding:4px; background:#82100b; color:white; border-radius:3px; position:absolute; left:' +
+                            '<div style="font-size:0.8em; padding-left:6px; padding-right:6px; background:#82100b; color:white; border-radius:3px; position:absolute; left:' +
                                 data[0] +
                                 "px; top:" +
                                 (data[1] - 151) +
                                 'px;" class="userbadge ' +
                                 content["username"] +
                                 '">' +
-                                '<div style="left:0px; top:4px; transform:rotate(45deg); width:0px; height:0px; position:absolute; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-right:7px solid #15325F;"></div>' +
+                                '<div style="width:4px; height:4px; background:#82100b; position:absolute; top:13px; left:-1px; border-radius:50%;"></div>' +
                                 decodeURIComponent(atob(content["username"])) +
                                 "</div>"
                         );
