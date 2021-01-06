@@ -23,7 +23,7 @@ body {
 
 .toolbar {
     position: absolute;
-    top: 10px;
+    top: 60px;
     left: 10px;
     width: 50px;
     background-color: #ffffff;
@@ -44,7 +44,7 @@ body {
     float: left;
     /* Float the buttons side by side */
     font-size: 1em;
-    height: 45px;
+    height: 38px;
     width: 50px;
 }
 
