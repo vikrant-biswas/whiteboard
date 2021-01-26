@@ -1234,7 +1234,7 @@ const whiteboard = {
     setDrawColor(color) {
         var _this = this;
         _this.drawcolor = color;
-        $("#whiteboardColorpicker").css({ background: color });
+        document.getElementById("color-bucket-base-svg").setAttribute("fill", color);
         if (_this.tool == "text" && _this.latestActiveTextBoxId) {
             _this.sendFunction({
                 t: "setTextboxFontColor",
