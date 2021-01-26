@@ -299,6 +299,8 @@ function initWhiteboard() {
                 InfoService.hideSize();
                 InfoService.hideRectangleShapes();
                 InfoService.hideLines();
+                InfoService.hideUploadOptions();
+                InfoService.hideSaveOptions();
                 $(this).addClass("active");
                 var activeTool = $(this).attr("tool");
                 whiteboard.setTool(activeTool);
@@ -550,6 +552,18 @@ function initWhiteboard() {
             .off("click")
             .click(() => {
                 InfoService.toggleLines();
+            });
+
+        $("#uploadOptionsbtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleUploadOptions();
+            });
+
+        $("#saveOptionsbtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleSaveOptions();
             });
 
         var btnsMini = false;

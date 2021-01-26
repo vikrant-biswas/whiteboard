@@ -151,12 +151,21 @@ button {
     right: 10px;
 }
 
-.shapeContainer {
+.icons_container_3 {
     position: absolute;
     background-color: #ffffff;
     box-shadow: 1px 1px 4px #dfdcdb;
     left: 55px;
     width: 150px;
+    padding: 4px;
+}
+
+.icons_container_2 {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px #dfdcdb;
+    left: 55px;
+    width: 100px;
     padding: 4px;
 }
 

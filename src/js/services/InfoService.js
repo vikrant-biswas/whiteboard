@@ -11,6 +11,8 @@ class InfoService {
     #sizeDisplayed = false;
     #rectangleShapesDisplayed = false;
     #linesDisplayed = false;
+    #uploadOptionsDisplayed = false;
+    #saveOptionsDisplayed = false;
 
     get infoAreDisplayed() {
         return this.#infoAreDisplayed;
@@ -26,6 +28,14 @@ class InfoService {
 
     get linesDisplayed() {
         return this.#linesDisplayed;
+    }
+
+    get uploadOptionsDisplayed() {
+        return this.#uploadOptionsDisplayed;
+    }
+
+    get saveOptionsDisplayed() {
+        return this.#saveOptionsDisplayed;
     }
 
     /**
@@ -176,6 +186,24 @@ class InfoService {
         }
     }
 
+    toggleUploadOptions() {
+        const { uploadOptionsDisplayed } = this;
+        if (uploadOptionsDisplayed) {
+            this.hideUploadOptions();
+        } else {
+            this.displayUploadOptions();
+        }
+    }
+
+    toggleSaveOptions() {
+        const { saveOptionsDisplayed } = this;
+        if (saveOptionsDisplayed) {
+            this.hideSaveOptions();
+        } else {
+            this.displaySaveOptions();
+        }
+    }
+
     /**
      * Show the Size div
      */
@@ -234,6 +262,46 @@ class InfoService {
         $("#displayLinesBtn").toggleClass("active", false);
         this.#linesDisplayed = false;
         $("#linesContainer").hide();
+    }
+
+    /**
+     * Show the upload div
+     */
+    displayUploadOptions() {
+        $("#uploadContainer").toggleClass("displayNone", false);
+        $("#uploadOptionsbtn").toggleClass("active", true);
+        this.#uploadOptionsDisplayed = true;
+        $("#uploadContainer").show();
+    }
+
+    /**
+     * Hide the upload div
+     */
+    hideUploadOptions() {
+        $("#uploadContainer").toggleClass("displayNone", true);
+        $("#uploadOptionsbtn").toggleClass("active", false);
+        this.#uploadOptionsDisplayed = false;
+        $("#uploadContainer").hide();
+    }
+
+    /**
+     * Show the save div
+     */
+    displaySaveOptions() {
+        $("#saveContainer").toggleClass("displayNone", false);
+        $("#saveOptionsbtn").toggleClass("active", true);
+        this.#saveOptionsDisplayed = true;
+        $("#saveContainer").show();
+    }
+
+    /**
+     * Hide the save div
+     */
+    hideSaveOptions() {
+        $("#saveContainer").toggleClass("displayNone", true);
+        $("#saveOptionsbtn").toggleClass("active", false);
+        this.#saveOptionsDisplayed = false;
+        $("#saveContainer").hide();
     }
 }
 
