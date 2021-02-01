@@ -59,6 +59,12 @@ const whiteboard = {
      * @type Point
      */
     lastPointerPosition: new Point(0, 0),
+
+    updateUsername: function (newUsername) {
+        this.settings["username"] = newUsername.replace(/[^0-9a-z]/gi, "");
+        console.log("!@##!# new username set: ", atob(this.settings["username"]));
+    },
+
     loadWhiteboard: function (whiteboardContainer, newSettings) {
         const svgns = "http://www.w3.org/2000/svg";
         const _this = this;

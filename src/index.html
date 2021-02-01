@@ -10,6 +10,24 @@
         <!---Whiteboard container -!-->
         <div id="whiteboardContainer"></div>
 
+        <!-- The Modal -->
+        <div id="usernamePromptModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closeUsernamePromptModal" class="close">&times;</span>
+                <label for="uname"><b>Username</b></label>
+                <input
+                    id="usernameInput"
+                    type="text"
+                    placeholder="Enter Username"
+                    name="uname"
+                    required
+                />
+
+                <button id="submitUsername">Select</button>
+            </div>
+        </div>
+
         <!---Toolbar -!-->
         <div id="toolbar" class="toolbar">
             <div class="btn-group">
