@@ -60,6 +60,8 @@ module.exports = {
             }
         } else if (
             [
+                "arrow",
+                "double-arrow",
                 "line",
                 "pen",
                 "rect",

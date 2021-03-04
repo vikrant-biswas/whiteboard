@@ -23,6 +23,8 @@ const shortcutFunctions = {
         whiteboard.redrawMouseCursor();
     }),
     setTool_line: defineShortcut(() => $(".whiteboard-tool[tool=line]").click()),
+    setTool_arrow: defineShortcut(() => $(".whiteboard-tool[tool=arrow]").click()),
+    setTool_doubleArrow: defineShortcut(() => $(".whiteboard-tool[tool=double-arrow]").click()),
     setTool_rect: defineShortcut(() => $(".whiteboard-tool[tool=rect]").click()),
     setTool_circle: defineShortcut(() => $(".whiteboard-tool[tool=circle]").click()),
     setTool_text: defineShortcut(() => $(".whiteboard-tool[tool=text]").click()),

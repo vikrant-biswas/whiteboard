@@ -8,8 +8,34 @@ class InfoService {
      * @type {boolean}
      */
     #infoAreDisplayed = false;
+    #sizeDisplayed = false;
+    #rectangleShapesDisplayed = false;
+    #linesDisplayed = false;
+    #uploadOptionsDisplayed = false;
+    #saveOptionsDisplayed = false;
+
     get infoAreDisplayed() {
         return this.#infoAreDisplayed;
+    }
+
+    get sizeDisplayed() {
+        return this.#sizeDisplayed;
+    }
+
+    get rectangleShapesDisplayed() {
+        return this.#rectangleShapesDisplayed;
+    }
+
+    get linesDisplayed() {
+        return this.#linesDisplayed;
+    }
+
+    get uploadOptionsDisplayed() {
+        return this.#uploadOptionsDisplayed;
+    }
+
+    get saveOptionsDisplayed() {
+        return this.#saveOptionsDisplayed;
     }
 
     /**
@@ -131,6 +157,151 @@ class InfoService {
         } else {
             this.displayInfo();
         }
+    }
+
+    toggleSize() {
+        const { sizeDisplayed } = this;
+        if (sizeDisplayed) {
+            this.hideSize();
+        } else {
+            this.displaySize();
+        }
+    }
+
+    toggleRectangleShapes() {
+        const { rectangleShapesDisplayed } = this;
+        if (rectangleShapesDisplayed) {
+            this.hideRectangleShapes();
+        } else {
+            this.displayRectangleShapes();
+        }
+    }
+
+    toggleLines() {
+        const { linesDisplayed } = this;
+        if (linesDisplayed) {
+            this.hideLines();
+        } else {
+            this.displayLines();
+        }
+    }
+
+    toggleUploadOptions() {
+        const { uploadOptionsDisplayed } = this;
+        if (uploadOptionsDisplayed) {
+            this.hideUploadOptions();
+        } else {
+            this.displayUploadOptions();
+        }
+    }
+
+    toggleSaveOptions() {
+        const { saveOptionsDisplayed } = this;
+        if (saveOptionsDisplayed) {
+            this.hideSaveOptions();
+        } else {
+            this.displaySaveOptions();
+        }
+    }
+
+    /**
+     * Show the Size div
+     */
+    displaySize() {
+        $("#sizeContainer").toggleClass("displayNone", false);
+        $("#displaySizeBtn").toggleClass("active", true);
+        this.#sizeDisplayed = true;
+        $("#sizeContainer").show();
+    }
+
+    /**
+     * Hide the Size div
+     */
+    hideSize() {
+        $("#sizeContainer").toggleClass("displayNone", true);
+        $("#displaySizeBtn").toggleClass("active", false);
+        this.#sizeDisplayed = false;
+        $("#sizeContainer").hide();
+    }
+
+    /**
+     * Show the Rectangle Shapes div
+     */
+    displayRectangleShapes() {
+        $("#rectShapeContainer").toggleClass("displayNone", false);
+        $("#displayRectangleShapesBtn").toggleClass("active", true);
+        this.#rectangleShapesDisplayed = true;
+        $("#rectShapeContainer").show();
+    }
+
+    /**
+     * Hide the Rectangle Shapes div
+     */
+    hideRectangleShapes() {
+        $("#rectShapeContainer").toggleClass("displayNone", true);
+        $("#displayRectangleShapesBtn").toggleClass("active", false);
+        this.#rectangleShapesDisplayed = false;
+        $("#rectShapeContainer").hide();
+    }
+
+    /**
+     * Show the lines div
+     */
+    displayLines() {
+        $("#linesContainer").toggleClass("displayNone", false);
+        $("#displayLinesBtn").toggleClass("active", true);
+        this.#linesDisplayed = true;
+        $("#linesContainer").show();
+    }
+
+    /**
+     * Hide the lines div
+     */
+    hideLines() {
+        $("#linesContainer").toggleClass("displayNone", true);
+        $("#displayLinesBtn").toggleClass("active", false);
+        this.#linesDisplayed = false;
+        $("#linesContainer").hide();
+    }
+
+    /**
+     * Show the upload div
+     */
+    displayUploadOptions() {
+        $("#uploadContainer").toggleClass("displayNone", false);
+        $("#uploadOptionsbtn").toggleClass("active", true);
+        this.#uploadOptionsDisplayed = true;
+        $("#uploadContainer").show();
+    }
+
+    /**
+     * Hide the upload div
+     */
+    hideUploadOptions() {
+        $("#uploadContainer").toggleClass("displayNone", true);
+        $("#uploadOptionsbtn").toggleClass("active", false);
+        this.#uploadOptionsDisplayed = false;
+        $("#uploadContainer").hide();
+    }
+
+    /**
+     * Show the save div
+     */
+    displaySaveOptions() {
+        $("#saveContainer").toggleClass("displayNone", false);
+        $("#saveOptionsbtn").toggleClass("active", true);
+        this.#saveOptionsDisplayed = true;
+        $("#saveContainer").show();
+    }
+
+    /**
+     * Hide the save div
+     */
+    hideSaveOptions() {
+        $("#saveContainer").toggleClass("displayNone", true);
+        $("#saveOptionsbtn").toggleClass("active", false);
+        this.#saveOptionsDisplayed = false;
+        $("#saveContainer").hide();
     }
 }
 

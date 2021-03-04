@@ -10,19 +10,71 @@ body {
     overflow: hidden;
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica,
         Arial, sans-serif;
+    background-color: #fafafa;
 }
 
 #whiteboardContainer {
     height: calc(var(--vh, 1vh) * 100);
     width: 100%;
+    margin-left: 80px !important;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px #dfdcdb;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    font-size: 150%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.toolbar {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 50px;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 6px #dfdcdb;
 }
 
 .btn-group button {
     background: transparent;
-    border: 2px solid #636060;
+    border: 0px solid #eee;
     margin: -1px;
     /* Green border */
-    color: black;
+    color: #15325f;
     /* White text */
     padding: 11px 14px;
     /* Some padding */
@@ -30,30 +82,9 @@ body {
     /* Pointer/hand icon */
     float: left;
     /* Float the buttons side by side */
-}
-
-@media (max-device-width: 1024px) {
-    .btn-group button {
-        font-size: 3em;
-        height: 135px;
-        width: 150px;
-    }
-
-    .minGroup {
-        width: 80px;
-    }
-}
-
-@media (min-device-width: 1024px) {
-    .btn-group button {
-        font-size: 1.2em;
-        height: 45px;
-        width: 50px;
-    }
-
-    .minGroup {
-        width: 25px;
-    }
+    font-size: 1em;
+    height: 45px;
+    width: 50px;
 }
 
 button::-moz-focus-inner {
@@ -68,6 +99,15 @@ button::-moz-focus-inner {
         rgba(255, 166, 0, 0.666) 10px,
         rgba(255, 166, 0, 0.666) 20px
     );
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid black;
 }
 
 /*
@@ -89,7 +129,7 @@ button::-moz-focus-inner {
 /* Add a background color on hover */
 
 .btn-group button:hover {
-    background-color: #9a9a9a;
+    background-color: #e0e0e0;
 }
 
 button {
@@ -97,9 +137,7 @@ button {
 }
 
 .btn-group {
-    background-color: #808080ab;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    background-color: #ffffff;
     float: left;
     position: relative;
 }
@@ -121,7 +159,7 @@ button {
 }
 
 .textBox.active {
-    border: 1px dashed gray;
+    border: 2px dotted black;
 }
 
 .textBox > .removeIcon,
@@ -150,6 +188,49 @@ button {
     position: absolute;
     bottom: 10px;
     right: 10px;
+}
+
+.icons_container_3 {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px #dfdcdb;
+    left: 55px;
+    width: 150px;
+    padding: 4px;
+}
+
+.icons_container_2 {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px #dfdcdb;
+    left: 55px;
+    width: 100px;
+    padding: 4px;
+}
+
+.sizeContainer {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 4px #dfdcdb;
+    left: 55px;
+}
+
+.sizeContainer button {
+    background: transparent;
+    border: 0px solid #eee;
+    margin: -1px;
+    /* Green border */
+    color: #15325f;
+    /* White text */
+    padding: 11px 14px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    float: left;
+    /* Float the buttons side by side */
+    font-size: 1em;
+    height: 45px;
+    width: 50px;
 }
 
 .displayNone {

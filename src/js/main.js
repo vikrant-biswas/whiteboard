@@ -33,7 +33,7 @@ if (urlParams.get("whiteboardid") !== whiteboardId) {
     window.location.search = urlParams;
 }
 
-const myUsername = urlParams.get("username") || "unknown" + (Math.random() + "").substring(2, 6);
+let myUsername = urlParams.get("username") || "unknown" + (Math.random() + "").substring(2, 6);
 const accessToken = urlParams.get("accesstoken") || "";
 
 // Custom Html Title
@@ -47,6 +47,8 @@ let signaling_socket;
 
 function main() {
     signaling_socket = io("", { path: subdir + "/ws-api" }); // Connect even if we are in a subdir behind a reverse proxy
+
+    getUsernameFromPrompt();
 
     signaling_socket.on("connect", function () {
         console.log("Websocket connected!");
@@ -138,6 +140,36 @@ function showBasicAlert(html, newOptions) {
             alertHtml.find(".okbtn").click();
         }, 1000 * options.hideAfter);
     }
+}
+
+function getUsernameFromPrompt() {
+    if (myUsername.includes("unknown")) {
+        var modal = document.getElementById("usernamePromptModal");
+        modal.style.display = "block";
+    }
+
+    $(document).ready(function () {
+        // close username prompt
+        $("#closeUsernamePromptModal")
+            .off("click")
+            .click(function () {
+                $("#usernamePromptModal").hide();
+            });
+
+        $("#submitUsername")
+            .off("click")
+            .click(function () {
+                let value = $("#usernameInput").val();
+                if (value) {
+                    myUsername = value;
+                    console.log("!@#!#@!# got new username value from prompt input: ", myUsername);
+                    whiteboard.updateUsername(btoa(myUsername));
+                } else {
+                    console.log("undefined value? : ", value);
+                }
+                $("#usernamePromptModal").hide();
+            });
+    });
 }
 
 function initWhiteboard() {
@@ -289,16 +321,22 @@ function initWhiteboard() {
             });
         $("#whiteboardUnlockBtn").hide();
         $("#whiteboardLockBtn").show();
+        $("#sizeContainer").hide();
 
         // switch tool
         $(".whiteboard-tool")
             .off("click")
             .click(function () {
                 $(".whiteboard-tool").removeClass("active");
+                InfoService.hideSize();
+                InfoService.hideRectangleShapes();
+                InfoService.hideLines();
+                InfoService.hideUploadOptions();
+                InfoService.hideSaveOptions();
                 $(this).addClass("active");
                 var activeTool = $(this).attr("tool");
                 whiteboard.setTool(activeTool);
-                if (activeTool == "mouse" || activeTool == "recSelect") {
+                if (activeTool == "mouse" || activeTool == "recSelect" || activeTool == "color") {
                     $(".activeToolIcon").empty();
                 } else {
                     $(".activeToolIcon").html($(this).html()); //Set Active icon the same as the button icon
@@ -528,6 +566,36 @@ function initWhiteboard() {
             .off("click")
             .click(() => {
                 InfoService.toggleDisplayInfo();
+            });
+
+        $("#displaySizeBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleSize();
+            });
+
+        $("#displayRectangleShapesBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleRectangleShapes();
+            });
+
+        $("#displayLinesBtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleLines();
+            });
+
+        $("#uploadOptionsbtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleUploadOptions();
+            });
+
+        $("#saveOptionsbtn")
+            .off("click")
+            .click(() => {
+                InfoService.toggleSaveOptions();
             });
 
         var btnsMini = false;
